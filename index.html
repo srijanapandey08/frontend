@@ -4,63 +4,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Online Voting System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f6f8ff, #d6e4ff);
+            margin: 0;
+            padding: 20px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+            padding: 30px;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            color: #4b5563;
+            margin-bottom: 24px;
+        }
+
+        .candidate {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background: #f9fafb;
+        }
+
+        .candidate input {
+            margin-right: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .status {
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            text-align: center;
+            display: none;
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: aqua;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input,
-    textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    button {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
 
 <body>
-    <h1>Contact us</h1>
-    <form id="contactForm">
-        <label>
-            Name:
-            <input type="text" id="name" required>
-        </label><br><br>
-        <label>
-            Email:
-            <input type="email" id="email" required>
-        </label><br><br>
-        <label>
-            Message:
-            <textarea id="message" required></textarea>
-        </label><br><br>
-        <button type="submit">Send</button>
-    </form>
+    <div class="container">
+        <h1>Online Voting</h1>
+        <p class="description">Choose one candidate and submit your vote. This is a simple voting demo for learning
+            purposes.</p>
 
+        <form id="voteForm">
+            <label class="candidate">
+                <span>
+                    <input type="radio" name="candidate" value="Alice Johnson" required>
+                    Alice Johnson
+                </span>
+                <span>Party A</span>
+            </label>
+
+            <label class="candidate">
+                <span>
+                    <input type="radio" name="candidate" value="Brian Smith">
+                    Brian Smith
+                </span>
+                <span>Party B</span>
+            </label>
+
+            <label class="candidate">
+                <span>
+                    <input type="radio" name="candidate" value="Carla Martinez">
+                    Carla Martinez
+                </span>
+                <span>Independent</span>
+            </label>
+
+            <button type="submit">Submit Vote</button>
+        </form>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        const voteForm = document.getElementById('voteForm');
+        const statusBox = document.getElementById('status');
+
+        voteForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(voteForm);
+            const selectedCandidate = formData.get('candidate');
+
+            statusBox.textContent = 'Thank you! Your vote for ' + selectedCandidate + ' has been recorded.';
+            statusBox.style.display = 'block';
+        });
+    </script>
 </body>
 
 </html>
